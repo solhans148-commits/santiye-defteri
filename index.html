@@ -12,15 +12,18 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Şantiye Defteri" />
     <title>Şantiye Defteri</title>
-    <link rel="stylesheet" href="./bundle.css" />
+    <link rel="stylesheet" href="./bundle.css?v=1.5.0" />
   </head>
   <body>
     <div id="root"></div>
-    <script src="./bundle.js"></script>
+    <script src="./bundle.js?v=1.5.0"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./sw.js").catch(() => {});
+          navigator.serviceWorker
+            .register("./sw.js", { updateViaCache: "none" })
+            .then((reg) => reg.update().catch(() => {}))
+            .catch(() => {});
         });
       }
     </script>
